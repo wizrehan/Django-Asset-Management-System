@@ -1,0 +1,321 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/main.css' %}" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" rel="stylesheet">
+    </head>
+    
+    <body>
+
+        
+            <div class="header-footer-div" style="padding: 8px;">
+                <img src="{% static 'icons/ZPE-Logo.png' %}" id="logo" />
+            </div>
+    
+            <div>
+                <div style="display: inline-block; margin-left: 3%;">
+                    <p style="text-align: center;">Total Sites: 10</p>
+                    <div style="width: 315px; height: 201px">
+                        <canvas id="total-sites-chart" style="width: 315px; height: 201px"></canvas>
+                    </div>
+                </div>
+    
+                <div style="display: inline-block; margin-left: 3%;">
+                    <p style="text-align: center;">Total Devices: 50</p>
+                    <div style="width: 315px; height: 201px">
+                        <canvas id="total-devices-chart" style="width: 315px; height: 201px"></canvas>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Copmany Information section -->
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Company Information</p>
+                    <img class="heading-icon" src="{% static 'icons/work.png' %}" />
+                </div>
+    
+                <p class="sub-heading">Company Name : <span class="subheading-value">ZPE Systems</span></p>
+                <p class="sub-heading">Address : <span class="subheading-value">USA</span></p>
+            </div>
+    
+            <!-- Sites Information section -->
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Sites Information</p>
+                    <img class="heading-icon" src="{% static 'icons/map-location.png' %}" />
+                </div>
+    
+                <div class="heading-wrap">
+                    <div class="dot online"></div>
+                    <p class="sub-heading inline-block" style="margin-right: 10px">Sites which are online :</p>
+    
+                    <div class="chip-wrap inline-block">
+                        <li class="chip">
+                            <span>ZPE_India, </span>
+                            <span>ZPE_Test</span>
+                        </li>
+                    </div>
+    
+    
+                </div>
+    
+    
+                <div class="heading-wrap">
+                    <div class="dot offline"></div>
+                    <p class="sub-heading inline-block" style="margin-right: 10px">Sites which are offline :</p>
+    
+                    <div class="chip-wrap inline-block">
+                        <li class="chip"><span>ZPE_Brazil</span></li>
+                    </div>
+    
+                </div>
+    
+    
+                <div class="heading-wrap">
+                    <div class="dot not-connected"></div>
+                    <p class="sub-heading inline-block" style="margin-right: 10px">Sites which are in partial state :</p>
+                    <div class="chip-wrap inline-block">
+                        <li class="chip"><span>ZPE_Ireland</span></li>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Devices Information section -->
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Devices Summary</p>
+                    <img class="heading-icon" src="{% static 'icons/modem.png' %}" />
+                </div>
+    
+                <div class="heading-wrap">
+                    <div class="dot online"></div>
+                    <p class="sub-heading inline-block">
+                        Devices currently in online state :
+                        <span class="subheading-value">3</span>
+                    </p>
+                </div>
+                <div class="heading-wrap">
+                    <div class="dot offline"></div>
+                    <p class="sub-heading inline-block">Devices currently in offline state : <span class="subheading-value">4</span></p>
+                </div>
+                <div class="heading-wrap">
+                    <div class="dot not-connected"></div>
+                    <p class="sub-heading inline-block">
+                        Device currently in never connected state :
+                        <span class="subheading-value">6</span>
+                    </p>
+                </div>
+    
+                <hr />
+    
+                <p class="sub-heading">Available Devices : <span class="subheading-value">16</span></p>
+                <p class="sub-heading">Enrolled Devices : <span class="subheading-value">14</span></p>
+                <hr />
+    
+                <p class="sub-heading">NSR Mode Devices : <span class="subheading-value">15</span></p>
+                <p class="sub-heading">NGB-SR Model Devices : <span class="subheading-value">10</span></p>
+                <p class="sub-heading">NGL-SR Model Devices : <span class="subheading-value">4</span></p>
+            </div>
+    
+    
+            <div class="header-footer-div">
+                <p class="inline-block">1 | Cloud Report</p>
+                <p style="float: right;">Confidential</p>
+            </div>
+        </div>
+    
+    
+        <!-- SECOND PAGE -->
+        
+            <div class="header-footer-div" style="padding: 8px;">
+                <img src="{% static 'icons/ZPE-Logo.png' %}" id="logo" />
+            </div>
+    
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Device Data Summary</p>
+                    <img class="heading-icon" src="{% static 'icons/download.png' %}" />
+                </div>
+    
+                <p class="sub-heading">Total TX bytes : <span class="subheading-value">2000 bytes</span></p>
+                <p class="sub-heading">Total RX bytes : <span class="subheading-value">2000 bytes</span></p>
+    
+                <div style="width: 650px; height: 260px">
+                    <canvas id="device-data-chart" style="width: 650px; height: 260px"></canvas>
+                </div>
+                <hr />
+                <p class="sub-heading">Cellular Data Usage for January : <span class="subheading-value">2 GB</span>
+                </p>
+            </div>
+    
+            <!-- Groups -->
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Groups</p>
+                    <img class="heading-icon" src="{% static 'icons/group.png' %}" />
+                </div>
+    
+                <p class="sub-heading">Total Groups : <span class="subheading-value">5</span></p>
+                <p class="sub-heading">Devices assigned to G1 : <span class="subheading-value">3</span></p>
+                <p class="sub-heading">Devices assigned to G2 : <span class="subheading-value">5</span></p>
+                <p class="sub-heading">Devices assigned to G3 : <span class="subheading-value">6</span></p>
+            </div>
+    
+            <!-- Users -->
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Users</p>
+                    <img class="heading-icon" src="{% static 'icons/user.png' %}" />
+                </div>
+    
+                <div class="heading-wrap">
+                    <div class="inline-block">
+                        <p class="sub-heading">Users with Customer Admin role : <span class="subheading-value">4</span></p>
+                        <p class="sub-heading">Users with Group Admin role : <span class="subheading-value">2</span></p>
+                    </div>
+    
+                    <div class="inline-block" style="margin-left: 30px;">
+                        <p class="sub-heading">Currently Active Users : <span class="subheading-value">5</span></p>
+                        <p class="sub-heading">Currently Locked Users: <span class="subheading-value">0</span></p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Profiles -->
+            <div class="section-wrap">
+                <div class="heading-wrap">
+                    <p class="heading">Profiles</p>
+                    <img class="heading-icon" src="{% static 'icons/profile.png' %}" />
+                </div>
+    
+                <p class="sub-heading">Total Configuration available : <span class="subheading-value">5</span></p>
+                <p class="sub-heading">Total Scripts available : <span class="subheading-value">6</span></p>
+                <p class="sub-heading">Total Backup Operations : <span class="subheading-value">10</span></p>
+                <p class="sub-heading">Total Software Versions available : <span class="subheading-value">1</span></p>
+            </div>
+    
+            <div class="header-footer-div">
+                <p class="inline-block">2 | Cloud Report</p>
+                <p style="float: right;">Confidential</p>
+            </div>
+        </div>
+    
+        </div>
+        
+
+        <script type="text/javascript">
+            'use strict';
+            (function(setLineDash) {
+                CanvasRenderingContext2D.prototype.setLineDash = function() {
+                    if(!arguments[0].length){
+                        arguments[0] = [1,0];
+                    }
+                    // Now, call the original method
+                    return setLineDash.apply(this, arguments);
+                };
+            })(CanvasRenderingContext2D.prototype.setLineDash);
+            Function.prototype.bind = Function.prototype.bind || function (thisp) {
+                var fn = this;
+                return function () {
+                    return fn.apply(thisp, arguments);
+                };
+            };
+            function drawCharts(){
+                var ts = document.getElementById('total-sites-chart').getContext('2d');
+                var myChart = new Chart(ts, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            'Online',
+                            'Offline',
+                            'Partial',
+                        ],
+                        datasets: [{
+                            data: [400, 1000, 100],
+                            backgroundColor: [
+                                'rgb(70, 171, 78)',
+                                'rgb(212, 78, 78)',
+                                'rgb(237, 192, 85)',
+                            ]
+                        }],
+                    },
+                    options: {
+                        animation: false,
+                        legend: {
+                            display: true,
+                            position: "bottom",
+                            labels: {
+                                boxWidth: 12
+                            }
+                        }
+                    }
+
+                });
+
+                var td = document.getElementById('total-devices-chart').getContext('2d');
+                var myChart = new Chart(td, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            'Online',
+                            'Offline',
+                            'Never connected'
+                        ],
+                        datasets: [{
+                            data: [0, 0, 100],
+                            backgroundColor: [
+                                'rgb(70, 171, 78)',
+                                'rgb(212, 78, 78)',
+                                'rgba(26, 128, 242,0.8)',
+                            ]
+                        }],
+                    },
+
+                    options: {
+                        animation: false,
+                        legend: {
+                            display: true,
+                            position: "bottom",
+                            labels: {
+                                boxWidth: 12
+                            }
+
+                        }
+                    }
+                });
+
+
+
+                var ctx = document.getElementById('device-data-chart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    options: {
+                        animation: false,
+                    },
+                    data: {
+                        labels: [
+                            'rxBytes',
+                            'txBytes'
+                        ],
+                        datasets: [{
+                            data: [400, 1000],
+                            backgroundColor: ['rgba(255, 238, 54, 0.7)', 'rgba(76, 148, 52,0.7)']
+                        }],
+                    },
+
+                });
+            };
+            window.onload = function() {
+                drawCharts();
+            };
+        </script>
+
+    </body>
+
+</html>

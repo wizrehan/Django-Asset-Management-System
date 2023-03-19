@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Colorlib Templates">
+        <meta name="author" content="Colorlib">
+        <meta name="keywords" content="Colorlib Templates">
+
+        <!-- Title Page-->
+        <title>Add Employee</title>
+
+        <!-- Icons font CSS-->
+        <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+        <link  rel = "icon" class="image" href="{% static 'single_logo.png' %}" >
+        <!-- Font special for pages-->
+        <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' %}" rel="stylesheet">
+
+        <!-- Vendor CSS-->
+        <link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+        <link href="{% static 'vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+        <!-- Main CSS-->
+        <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all">
+    </head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Add Employee</h2>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="name">Employee ID</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                        <label for='employee_id'> </label>
+                                            <input type='number' placeholder="Input Employee ID" class="input--style-5" name="employee_id" required >
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Employee Name</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='employee_name'></label>
+                                            <input type='text' placeholder="Enter Employee Name" class="input--style-5" name="employee_name" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Department</div>
+                                    <div class="value"> 
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="department_id" id="department_name" class="form-control bg-light border-1 small " >
+                                                    <option value = null selected >Choose Department</option>
+                                                    {% for item in ViewDep  %}
+                                                        <option value="{{ item.0 }}">{{ item.1 }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            <div class="select-dropdown" required></div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Designation</div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="designation_id" id="designation_name" class="form-control">       
+                                                    <option disabled="disabled" selected="selected" required >Choose Option </option>     
+                                                    {% for item in ViewDes  %}
+                                                    <option value="{{ item.0 }}">{{ item.1 }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            <div class="select-dropdown" required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Unit</div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="unit_id" id="unit_name" class="form-control">       
+                                                    <option disabled="disabled" selected="selected" required >Choose Option </option>     
+                                                    {% for item in ViewUnit  %}
+                                                    <option value="{{ item.0 }}">{{ item.1 }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="select-dropdown" required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Contact</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='contact'></label>
+                                            <input type='text' placeholder="Input Employee Contact" class="input--style-5" name="contact" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Employee Mail</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='employee_mail'></label>
+                                            <input type='text' placeholder="Input Employee mail" class="input--style-5" name="employee_mail" required >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="name">Office Location</div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="office_location_id" id="address" class="form-control">       
+                                                    <option disabled="disabled" selected="selected" required >Choose Option </option>     
+                                                    {% for item in ViewOL  %}
+                                                    <option value="{{ item.0 }}">{{ item.1 }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="select-dropdown" required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="name">Employee Status </div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple select--no-search" required>
+                                                <select name="employee_status" >
+                                                    <option disabled="disabled" selected="selected" required >Choose option</option >
+                                                    <option>Active</option>
+                                                    <option>Inactive</option>
+                                                </select>
+                                                <div class="select-dropdown" required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Create By</div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="create_by" class="form-control">       
+                                                    <option  required >{{user}} </option>     
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Is Deleted</div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="is_deleted" class="form-control">       
+                                                    <option  required >NO </option>     
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div>
+                                    
+                                    <button type="submit" class="btn btn--radius-2 btn--red " >Add Employee</button>
+                                </div>
+                                <br>
+                                {% if messages%}
+                                {% for message in messages %}
+                                
+                                <h4 style="color: green;">{{message}}
+                                    <a class="collapse-item " href="{% url 'view_employee' %}">View Employee Details</a>
+                                </h4>
+                                {% endfor %}
+                                {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-bottom">
+        <footer class="py-2 bg-black mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Bengal Group of Industries</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+    <!-- Jquery JS-->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'vendor/select2/select2.min.js'%}"></script>
+    <script src="{% static 'vendor/datepicker/moment.min.js'%}"></script>
+    <script src="{% static 'vendor/datepicker/daterangepicker.js'%}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'js/global.js'%}"></script>
+
+</body>
+
+</html>

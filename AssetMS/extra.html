@@ -1,0 +1,206 @@
+
+
+
+<!-- Jquery JS-->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'vendor/select2/select2.min.js'%}"></script>
+    <script src="{% static 'vendor/datepicker/moment.min.js'%}"></script>
+    <script src="{% static 'vendor/datepicker/daterangepicker.js'%}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'js/global.js'%}"></script>
+
+
+
+    
+
+    from django.shortcuts import render
+from django.http import HttpResponse
+import mysql.connector as sql
+from django.contrib import messages
+
+role_id = ''
+role_name = ''
+
+
+# Create your views here.
+def create_role(request):
+    global role_id, role_name
+
+    if request.method == "POST":
+        m = sql.connect(host='127.0.0.1', user='root', passwd = '72750', port = '3306', database = 'assetmanager')
+        cursor = m.cursor()
+        d= request.POST
+
+        for key,value in d.items():
+            if key=='role_id':
+                role_id = value
+            if key=='role_name':
+                role_name = value
+            
+
+        c = "insert into role Values('{}','{}')".format(role_id, role_name)
+        #c = "insert into user( username,full_name,password,contact,mail,role_id,status)". values( '{}','{}','{}','{}','{}','{}','{}')
+        cursor.execute(c)
+        m.commit()
+        t = tuple(cursor.fetchall())
+        if t ==():
+              return render(request,"pages/home.html")
+        else:
+            return render(request,'pages/error.html')
+              
+
+    return render(request, "pages/create_role.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------user>view---------
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout
+from django.shortcuts import HttpResponseRedirect
+import mysql.connector as sql
+from .models import CreateUser
+from django.contrib import messages
+
+username = ''
+full_name = ''
+password = ''
+contact = ''
+mail = ''
+role_id = ''
+status = ''
+
+# Create your views here.
+def create_user(request):
+    
+    global user_id,username, full_name,password,contact,mail,role_id,status
+
+    if request.method == "POST":
+        if request.POST.get('username') and request.POST.get('full_name') and request.POST.get('password') and request.POST.get('contact') and request.POST.get('mail') and request.POST.get('role_id') and request.POST.get('status'):
+            saverecord = CreateUser()
+            saverecord.username = request.POST.get('username')
+            saverecord.full_name = request.POST.get('full_name')
+            saverecord.password = request.POST.get('password')
+            saverecord.contact = request.POST.get('contact')
+            saverecord.mail = request.POST.get('mail')
+            saverecord.role_id = request.POST.get('role_id')
+            saverecord.status = request.POST.get('status')
+            saverecord.save()
+            messages.success(request, "User Created Succesfully !")
+            return render(request, 'pages/create_user.html')
+
+    r= sql.connect(host='127.0.0.1', user='root', passwd = '72750', port = '3306', database = 'assetmanager')
+    cursor = r.cursor()
+    query = "SELECT * FROM assetmanager.role"
+    cursor.execute(query)
+    results = tuple(cursor.fetchall())
+
+
+    return render(request, "pages/create_user.html", {'ViewRole':results})
+
+
+
+
+
+-------------------------create_user.html--------------
+
+<div class="form-row">
+                                    <div class="name">Username</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='username'></label>
+                                            <input type='text' placeholder="Input User Name" class="input--style-5" name="username" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Full Name</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='full_name'></label>
+                                            <input type='text' placeholder="Enter Full Name" class="input--style-5" name="full_name" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Password</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='password'></label>
+                                            <input type='text' placeholder="Enter Password" class="input--style-5" name="password" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Contact</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='contact'></label>
+                                            <input type='text' placeholder="Enter Contact" class="input--style-5" name="contact" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">E-mail</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <label for='mail'></label>
+                                            <input type='text' placeholder="Enter mail address" class="input--style-5" name="mail" required >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Role</div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple " required>
+                                                <select name="role_id" id="role_name" class="form-control">       
+                                                    <option disabled="disabled" selected="selected" required >Choose Option </option>     
+                                                    {% for item in ViewRole  %}
+                                                    <option value="{{ item.0 }}">{{ item.1 }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="select-dropdown" required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">User Status </div>
+                                    <div class="value">
+                                        <div class="input-group" required>
+                                            <div class="rs-select2 js-select-simple select--no-search" required>
+                                                <select name="status" >
+                                                    <option disabled="disabled" selected="selected" required >Choose option</option >
+                                                    <option>Active</option>
+                                                    <option>Inactive</option>
+                                                </select>
+                                                <div class="select-dropdown" required></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+Lokman - Asif5432*7
+Raihan - Ra656i&an
